@@ -49,20 +49,36 @@ LEAD_EMAIL_FROM=AIA Agent <leads@your-domain.com>
 
 ## Cloudflare Deploy
 
-Cloudflare build settings:
+Live URL:
 
 ```bash
-Build command: npm run build
-Build output directory: dist
-Node version: 22 or newer
+https://aia-agent-site.pages.dev
 ```
 
-For the Astro Cloudflare adapter, create a KV namespace named for sessions and bind it as `SESSION` in Cloudflare Pages project settings. The site does not use sessions directly, but the current adapter config expects this binding.
+Cloudflare Pages project:
+
+```bash
+aia-agent-site
+```
+
+This repo deploys with GitHub Actions using Direct Upload to the existing Cloudflare Pages project. Add these GitHub repository secrets before relying on automatic deploys:
+
+```bash
+CLOUDFLARE_API_TOKEN=...
+CLOUDFLARE_ACCOUNT_ID=389594342d2a1d5bef76a38515c33950
+```
+
+The Cloudflare Pages project already has:
+
+```bash
+PUBLIC_SITE_URL=https://aia-agent-site.pages.dev
+SESSION KV namespace binding
+```
 
 The build script supports two phases:
 
 - Without Tina Cloud credentials, it deploys the public website and `/api/lead`.
-- With `TINA_PUBLIC_CLIENT_ID` and `TINA_TOKEN`, it also builds the Tina Cloud admin at `/admin`.
+- With `TINA_PUBLIC_CLIENT_ID`, `TINA_TOKEN`, and `TINA_PUBLIC_BRANCH`, it also builds the Tina Cloud admin at `/admin`.
 
 Local build without Tina Cloud credentials:
 
@@ -84,39 +100,40 @@ export CLOUDFLARE_ACCOUNT_ID=...
 PUBLIC_SITE_URL=https://your-domain.com npm run deploy:cloudflare
 ```
 
+## GitHub Actions
+
+The workflow at `.github/workflows/deploy-cloudflare.yml` runs on every push to `main`.
+
+Required GitHub secrets:
+
+```bash
+CLOUDFLARE_API_TOKEN=...
+CLOUDFLARE_ACCOUNT_ID=389594342d2a1d5bef76a38515c33950
+```
+
+Optional GitHub secrets for Tina Cloud admin builds:
+
+```bash
+TINA_PUBLIC_CLIENT_ID=...
+TINA_TOKEN=...
+```
+
 ## Content
 
 Blog posts live in `src/content/blog/*.md`. Tina Cloud edits these files through Git, so connect the repository and branch in Tina Cloud, then set the matching branch in `TINA_PUBLIC_BRANCH`.
 
 ## Deploy Checklist
 
-1. Push this repository to GitHub.
-2. Create a Cloudflare Pages project from the repo.
-3. Set `PUBLIC_SITE_URL` to the production URL before the first production build.
-4. Create a Cloudflare KV namespace and bind it as `SESSION`.
+1. Repository is pushed to GitHub: `https://github.com/payamao/aia-agent-site`.
+2. Cloudflare Pages project is live: `https://aia-agent-site.pages.dev`.
+3. Add GitHub Actions secrets for automatic deploys.
+4. Connect the repo in Tina Cloud free tier and add Tina env vars when ready.
 5. Add LINE/Resend secrets if lead notifications should go live immediately.
-6. Connect the repo in Tina Cloud free tier and add Tina env vars when ready.
-
-### Recommended Dashboard Flow
-
-Because this project directory is not a Git repository yet, the cleanest deploy path is:
-
-```bash
-git init
-git add .
-git commit -m "Initial AIA agent site"
-git branch -M main
-git remote add origin <your-github-repo-url>
-git push -u origin main
-```
-
-Then create a Cloudflare Pages project from that GitHub repo. Cloudflare will run `npm run build` on every push.
 
 ### Required Cloudflare Bindings
 
-In Cloudflare Pages project settings, add:
+In Cloudflare Pages project settings:
 
 - KV namespace binding: `SESSION`
 - Environment variable: `PUBLIC_SITE_URL`
 - Optional lead notification secrets: `LINE_CHANNEL_ACCESS_TOKEN`, `LINE_TO_ID`, `RESEND_API_KEY`, `LEAD_EMAIL_TO`, `LEAD_EMAIL_FROM`
-- Tina Cloud vars when ready: `TINA_PUBLIC_CLIENT_ID`, `TINA_TOKEN`, `TINA_PUBLIC_BRANCH`
