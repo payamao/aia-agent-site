@@ -1,0 +1,48 @@
+---
+import { navItems, site } from "@/site";
+---
+
+<footer class="bg-[oklch(20%_0.04_258)] py-12 text-sm text-white/70">
+  <div class="container">
+    <div class="flex flex-wrap justify-between gap-8 border-b border-white/10 pb-8">
+      <div>
+        <b class="text-[17px] text-white">{site.name}</b>
+        <p class="mt-2 max-w-[38ch] leading-relaxed">
+          ที่ปรึกษาประกันชีวิตและการเงิน ตัวแทน AIA · รหัสตัวแทน {site.agentCode}
+        </p>
+      </div>
+      <div class="flex flex-wrap gap-12">
+        <div>
+          <h5 class="mb-3 text-[13px] font-bold uppercase tracking-[0.06em] text-white">
+            เมนู
+          </h5>
+          {navItems.map((item) => (
+            <a class="block py-1.5 text-white/65 transition hover:text-white" href={item.href}>
+              {item.label}
+            </a>
+          ))}
+        </div>
+        <div>
+          <h5 class="mb-3 text-[13px] font-bold uppercase tracking-[0.06em] text-white">
+            ติดต่อ
+          </h5>
+          <a class="block py-1.5 text-white/65 transition hover:text-white" href={`tel:${site.phone}`}>
+            {site.phoneDisplay}
+          </a>
+          <a class="block py-1.5 text-white/65 transition hover:text-white" href="/#contact">
+            นัดหมายปรึกษา
+          </a>
+          <span class="block py-1.5 text-white/45">LINE Official ผ่านระบบแจ้งเตือน</span>
+        </div>
+      </div>
+    </div>
+    <div class="pt-6 text-[12.5px] leading-relaxed text-white/50">
+      © 2026 {site.name} · สงวนลิขสิทธิ์
+      <div class="mt-2">
+        ข้อมูลในเว็บไซต์นี้เป็นข้อมูลเบื้องต้นเพื่อประกอบการตัดสินใจเท่านั้น
+        ความคุ้มครอง เงื่อนไข และเบี้ยประกันเป็นไปตามที่ระบุในกรมธรรม์
+        และการพิจารณารับประกันของบริษัทจริง
+      </div>
+    </div>
+  </div>
+</footer>

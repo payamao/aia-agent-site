@@ -1,0 +1,35 @@
+{
+  "name": "aia-agent-site",
+  "version": "1.0.0",
+  "type": "module",
+  "private": true,
+  "scripts": {
+    "dev": "ASTRO_TELEMETRY_DISABLED=1 astro dev",
+    "build": "npm run build:cloudflare",
+    "build:cloudflare": "node scripts/build-cloudflare.mjs",
+    "build:app": "ASTRO_TELEMETRY_DISABLED=1 astro check && ASTRO_TELEMETRY_DISABLED=1 astro build",
+    "deploy:cloudflare": "npm run build:cloudflare && WRANGLER_LOG_PATH=.wrangler/logs wrangler pages deploy dist",
+    "preview": "ASTRO_TELEMETRY_DISABLED=1 astro preview",
+    "check": "ASTRO_TELEMETRY_DISABLED=1 astro check",
+    "tina:dev": "ASTRO_TELEMETRY_DISABLED=1 tinacms dev -c \"astro dev\"",
+    "tina:build": "tinacms build"
+  },
+  "dependencies": {
+    "@astrojs/cloudflare": "^12.6.0",
+    "@astrojs/mdx": "^4.3.6",
+    "@astrojs/sitemap": "^3.6.0",
+    "@tailwindcss/vite": "^4.1.12",
+    "astro": "^5.13.5",
+    "lucide-astro": "^0.468.0",
+    "tinacms": "^2.8.2"
+  },
+  "devDependencies": {
+    "@astrojs/check": "^0.9.4",
+    "@tinacms/cli": "^2.4.1",
+    "tailwindcss": "^4.1.12",
+    "typescript": "^5.9.2"
+  },
+  "engines": {
+    "node": ">=22.0.0"
+  }
+}

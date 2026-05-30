@@ -1,0 +1,77 @@
+---
+import { getCollection, render } from "astro:content";
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import { formatThaiDate, getBlogSlug } from "@/lib/blog";
+import { site } from "@/site";
+
+export const prerender = true;
+
+export async function getStaticPaths() {
+  const posts = await getCollection("blog");
+  return posts.map((post) => ({
+    params: { slug: getBlogSlug(post) },
+    props: { post },
+  }));
+}
+
+const { post } = Astro.props;
+const { Content } = await render(post);
+const canonical = `${site.url}/blog/${getBlogSlug(post)}/`;
+const schema = {
+  "@context": "https://schema.org",
+  "@type": "Article",
+  headline: post.data.title,
+  description: post.data.description,
+  datePublished: post.data.pubDate.toISOString(),
+  dateModified: (post.data.updatedDate ?? post.data.pubDate).toISOString(),
+  author: {
+    "@type": "Person",
+    name: site.name,
+  },
+  publisher: {
+    "@type": "Organization",
+    name: site.name,
+  },
+  mainEntityOfPage: canonical,
+  inLanguage: "th-TH",
+};
+---
+
+<BaseLayout
+  title={`${post.data.title} · ${site.name}`}
+  description={post.data.description}
+  canonical={canonical}
+  type="article"
+  schema={schema}
+>
+  <main>
+    <article class="bg-white">
+      <header class="bg-brand-surface-2 py-[clamp(48px,7vw,88px)]">
+        <div class="container max-w-[860px]">
+          <a href="/blog" class="text-sm font-semibold text-brand-accent">บทความ</a>
+          <h1 class="mt-4 text-[clamp(2rem,5vw,3.35rem)] font-bold leading-tight">
+            {post.data.title}
+          </h1>
+          <p class="mt-5 text-[clamp(1.05rem,2vw,1.2rem)] text-brand-muted">
+            {post.data.description}
+          </p>
+          <div class="mt-5 text-sm text-brand-muted">
+            {post.data.category} · {post.data.readingTime} · {formatThaiDate(post.data.pubDate)}
+          </div>
+        </div>
+      </header>
+      <div class="container max-w-[760px] py-12">
+        <div class="prose-content">
+          <Content />
+        </div>
+        <div class="mt-12 rounded-2xl border border-brand-border bg-brand-surface-2 p-6">
+          <h2 class="text-xl font-bold">อยากเทียบแผนกับสถานการณ์จริงของคุณ?</h2>
+          <p class="mt-2 text-brand-muted">
+            ส่งข้อมูลคร่าว ๆ แล้วผมจะติดต่อกลับเพื่อช่วยดูทางเลือกที่เหมาะกับงบและความต้องการ
+          </p>
+          <a href="/#contact" class="btn btn-primary mt-5 w-auto">นัดหมายปรึกษาฟรี</a>
+        </div>
+      </div>
+    </article>
+  </main>
+</BaseLayout>

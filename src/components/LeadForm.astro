@@ -1,0 +1,183 @@
+---
+import { CheckCircle2 } from "lucide-astro";
+---
+
+<div class="rounded-[20px] border border-brand-border bg-white p-6 shadow-[0_20px_50px_oklch(27%_0.055_258/.08)] sm:p-9">
+  <form id="leadForm" novalidate>
+    <h3 class="text-[21px] font-bold">ฟอร์มนัดหมายปรึกษา</h3>
+    <p class="mt-1.5 mb-6 text-[14.5px] text-brand-muted">
+      กรอกข้อมูลคร่าว ๆ ผมจะติดต่อกลับโดยเร็วที่สุด
+    </p>
+
+    <input class="hidden" type="text" name="website" tabindex="-1" autocomplete="off" />
+
+    <div class="mb-5">
+      <label class="mb-2 block text-sm font-semibold">ช่องทางที่สะดวกให้ติดต่อกลับ</label>
+      <div class="grid gap-2 sm:grid-cols-3">
+        {["โทรศัพท์", "LINE", "อย่างไรก็ได้"].map((channel, index) => (
+          <label class="cursor-pointer rounded-[11px] border border-brand-border px-3 py-3 text-center text-sm font-medium transition has-[:checked]:border-brand-accent has-[:checked]:bg-brand-accent-soft has-[:checked]:font-semibold has-[:checked]:text-brand-accent">
+            <input class="sr-only" type="radio" name="channel" value={channel} checked={index === 0} />
+            <span>{channel}</span>
+          </label>
+        ))}
+      </div>
+    </div>
+
+    <div class="grid gap-3.5 sm:grid-cols-2">
+      <div class="field">
+        <label class="mb-2 block text-sm font-semibold" for="name">
+          ชื่อ-นามสกุล <span class="text-brand-accent">*</span>
+        </label>
+        <input
+          class="w-full rounded-[11px] border border-brand-border bg-white px-3.5 py-3 text-[15px] text-brand-fg outline-none transition focus:border-brand-accent focus:ring-4 focus:ring-brand-accent-soft"
+          id="name"
+          type="text"
+          name="name"
+          placeholder="เช่น สมชาย ใจดี"
+          autocomplete="name"
+        />
+        <div class="err mt-1.5 hidden text-[12.5px] text-brand-accent">กรุณากรอกชื่อ-นามสกุล</div>
+      </div>
+      <div class="field">
+        <label class="mb-2 block text-sm font-semibold" for="phone">
+          เบอร์โทรศัพท์ <span class="text-brand-accent">*</span>
+        </label>
+        <input
+          class="w-full rounded-[11px] border border-brand-border bg-white px-3.5 py-3 text-[15px] text-brand-fg outline-none transition focus:border-brand-accent focus:ring-4 focus:ring-brand-accent-soft"
+          id="phone"
+          type="tel"
+          name="phone"
+          inputmode="numeric"
+          placeholder="08X-XXX-XXXX"
+          autocomplete="tel"
+        />
+        <div class="err mt-1.5 hidden text-[12.5px] text-brand-accent">
+          กรุณากรอกเบอร์โทรให้ถูกต้อง (9-10 หลัก)
+        </div>
+      </div>
+    </div>
+
+    <div class="field mt-5">
+      <label class="mb-2 block text-sm font-semibold" for="interest">สนใจเรื่องไหนเป็นพิเศษ</label>
+      <select
+        class="w-full rounded-[11px] border border-brand-border bg-white px-3.5 py-3 text-[15px] text-brand-fg outline-none transition focus:border-brand-accent focus:ring-4 focus:ring-brand-accent-soft"
+        id="interest"
+        name="interest"
+      >
+        <option value="ประกันสุขภาพ">ประกันสุขภาพ</option>
+        <option value="ประกันชีวิต">ประกันชีวิต</option>
+        <option value="ออมทรัพย์ / บำนาญ">ออมทรัพย์ / บำนาญ</option>
+        <option value="ประกันโรคร้ายแรง">ประกันโรคร้ายแรง</option>
+        <option value="ยังไม่แน่ใจ อยากปรึกษาก่อน">ยังไม่แน่ใจ อยากปรึกษาก่อน</option>
+      </select>
+    </div>
+
+    <div class="field mt-5">
+      <label class="mb-2 block text-sm font-semibold" for="message">ข้อความเพิ่มเติม</label>
+      <textarea
+        class="min-h-24 w-full resize-y rounded-[11px] border border-brand-border bg-white px-3.5 py-3 text-[15px] text-brand-fg outline-none transition focus:border-brand-accent focus:ring-4 focus:ring-brand-accent-soft"
+        id="message"
+        name="message"
+        maxlength="1000"
+        placeholder="เช่น ช่วงเวลาที่สะดวกให้ติดต่อ หรือสิ่งที่อยากปรึกษา"></textarea>
+    </div>
+
+    <button
+      type="submit"
+      class="btn btn-primary mt-5 w-full py-3.5"
+      id="submitLead"
+    >
+      ส่งคำขอนัดหมาย
+    </button>
+    <p class="mt-3 text-[12.5px] leading-relaxed text-brand-muted">
+      เมื่อส่งฟอร์ม ถือว่าคุณยินยอมให้ผมติดต่อกลับเพื่อให้คำปรึกษา
+      ข้อมูลของคุณจะถูกใช้เพื่อการติดต่อเท่านั้น
+    </p>
+    <p class="mt-3 hidden rounded-xl border px-4 py-3 text-sm" id="formNotice" role="status"></p>
+  </form>
+
+  <div class="hidden py-8 text-center" id="formSuccess">
+    <div class="mx-auto mb-5 grid size-[62px] place-items-center rounded-full bg-[oklch(60%_0.14_150/.15)] text-[oklch(48%_0.14_150)]">
+      <CheckCircle2 class="size-8" aria-hidden="true" />
+    </div>
+    <h3 class="text-[22px] font-bold">ส่งคำขอเรียบร้อยแล้ว</h3>
+    <p class="mt-2 text-[15px] text-brand-muted">
+      ขอบคุณครับ <b id="successName"></b> ผมจะติดต่อกลับโดยเร็วที่สุด หากเร่งด่วนโทรได้ที่ 099-770-2627
+    </p>
+  </div>
+</div>
+
+<script>
+  const form = document.getElementById("leadForm");
+  const notice = document.getElementById("formNotice");
+  const submit = document.getElementById("submitLead");
+  const success = document.getElementById("formSuccess");
+  const successName = document.getElementById("successName");
+
+  function setInvalid(input: HTMLInputElement | null, bad: boolean) {
+    const field = input?.closest(".field");
+    const err = field?.querySelector(".err");
+    input?.classList.toggle("border-brand-accent", bad);
+    err?.classList.toggle("hidden", !bad);
+    return !bad;
+  }
+
+  function showNotice(message: string, type: "error" | "ok" = "error") {
+    if (!notice) return;
+    notice.textContent = message;
+    notice.className =
+      type === "error"
+        ? "mt-3 rounded-xl border border-brand-accent/30 bg-brand-accent-soft px-4 py-3 text-sm text-brand-accent"
+        : "mt-3 rounded-xl border border-[oklch(60%_0.14_150/.3)] bg-[oklch(60%_0.14_150/.08)] px-4 py-3 text-sm text-[oklch(42%_0.14_150)]";
+  }
+
+  form?.addEventListener("submit", async (event) => {
+    event.preventDefault();
+    if (!(form instanceof HTMLFormElement)) return;
+
+    const name = form.elements.namedItem("name");
+    const phone = form.elements.namedItem("phone");
+    if (!(name instanceof HTMLInputElement) || !(phone instanceof HTMLInputElement)) return;
+
+    const digits = phone.value.replace(/\D/g, "");
+    const okName = setInvalid(name, name.value.trim().length < 2);
+    const okPhone = setInvalid(phone, digits.length < 9 || digits.length > 10);
+
+    if (!okName || !okPhone) {
+      (okName ? phone : name).focus();
+      return;
+    }
+
+    submit?.setAttribute("disabled", "true");
+    submit?.classList.add("opacity-70");
+    showNotice("กำลังส่งข้อมูล...", "ok");
+
+    try {
+      const response = await fetch("/api/lead", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(Object.fromEntries(new FormData(form))),
+      });
+
+      if (!response.ok) {
+        const body = await response.json().catch(() => ({}));
+        throw new Error(body.message || "ส่งข้อมูลไม่สำเร็จ กรุณาโทรติดต่อโดยตรง");
+      }
+
+      if (successName) successName.textContent = name.value.trim();
+      form.classList.add("hidden");
+      success?.classList.remove("hidden");
+    } catch (error) {
+      showNotice(error instanceof Error ? error.message : "ส่งข้อมูลไม่สำเร็จ กรุณาลองใหม่");
+      submit?.removeAttribute("disabled");
+      submit?.classList.remove("opacity-70");
+    }
+  });
+
+  ["name", "phone"].forEach((fieldName) => {
+    const input = form instanceof HTMLFormElement ? form.elements.namedItem(fieldName) : null;
+    if (input instanceof HTMLInputElement) {
+      input.addEventListener("input", () => setInvalid(input, false));
+    }
+  });
+</script>

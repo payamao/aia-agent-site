@@ -1,0 +1,14 @@
+---
+import { HeartPulse, Landmark, ShieldCheck } from "lucide-astro";
+
+interface Props {
+  icon: "health" | "life" | "saving";
+}
+
+const { icon } = Astro.props;
+const Icon = icon === "health" ? HeartPulse : icon === "life" ? ShieldCheck : Landmark;
+---
+
+<div class="mb-5 grid size-[46px] place-items-center rounded-xl bg-brand-accent-soft text-brand-accent">
+  <Icon class="size-6" aria-hidden="true" />
+</div>

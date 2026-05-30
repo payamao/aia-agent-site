@@ -1,0 +1,91 @@
+---
+import { Menu, Phone } from "lucide-astro";
+import { navItems, site } from "@/site";
+---
+
+<header
+  class="sticky top-0 z-50 border-b border-brand-border bg-white/90 backdrop-blur-xl"
+  id="siteNav"
+>
+  <div class="container flex h-[68px] items-center justify-between gap-4">
+    <a href="/#top" class="flex min-w-0 items-center gap-3 font-semibold">
+      <span
+        class="grid size-9 shrink-0 place-items-center rounded-[9px] bg-gradient-to-br from-brand-accent to-brand-accent-dark text-[17px] font-bold text-white shadow-[0_4px_12px_oklch(55%_0.2_25/.3)]"
+      >
+        จ
+      </span>
+      <span class="min-w-0 text-[15.5px] leading-tight">
+        <span class="block truncate">{site.name}</span>
+        <small class="block truncate text-[11.5px] font-normal tracking-[0.02em] text-brand-muted">
+          {site.role}
+        </small>
+      </span>
+    </a>
+
+    <nav
+      class="hidden items-center gap-7 md:flex"
+      id="navLinks"
+      aria-label="เมนูหลัก"
+    >
+      {navItems.map((item) => (
+        <a
+          class="text-[15px] font-medium text-brand-muted transition hover:text-brand-fg"
+          href={item.href}
+        >
+          {item.label}
+        </a>
+      ))}
+    </nav>
+
+    <div class="flex shrink-0 items-center gap-3">
+      <a class="btn btn-ghost hidden lg:inline-flex" href={`tel:${site.phone}`}>
+        <Phone class="size-4" aria-hidden="true" />
+        โทรเลย
+      </a>
+      <a class="btn btn-primary hidden sm:inline-flex" href="/#contact">
+        นัดหมายปรึกษาฟรี
+      </a>
+      <button
+        class="grid size-[42px] place-items-center rounded-[10px] border border-brand-border bg-white md:hidden"
+        type="button"
+        id="navToggle"
+        aria-label="เปิดเมนู"
+        aria-expanded="false"
+      >
+        <Menu class="size-5" aria-hidden="true" />
+      </button>
+    </div>
+  </div>
+
+  <div
+    class="hidden border-t border-brand-border bg-white md:hidden"
+    id="mobileMenu"
+  >
+    <nav class="container flex flex-col py-3" aria-label="เมนูมือถือ">
+      {navItems.map((item) => (
+        <a class="py-3 text-base font-medium text-brand-muted" href={item.href}>
+          {item.label}
+        </a>
+      ))}
+      <a class="btn btn-primary mt-2" href="/#contact">นัดหมายปรึกษาฟรี</a>
+      <a class="btn btn-ghost mt-2" href={`tel:${site.phone}`}>โทร {site.phoneDisplay}</a>
+    </nav>
+  </div>
+</header>
+
+<script>
+  const navToggle = document.getElementById("navToggle");
+  const mobileMenu = document.getElementById("mobileMenu");
+
+  navToggle?.addEventListener("click", () => {
+    const isOpen = mobileMenu?.classList.toggle("hidden") === false;
+    navToggle.setAttribute("aria-expanded", String(isOpen));
+  });
+
+  mobileMenu?.querySelectorAll("a").forEach((link) => {
+    link.addEventListener("click", () => {
+      mobileMenu.classList.add("hidden");
+      navToggle?.setAttribute("aria-expanded", "false");
+    });
+  });
+</script>

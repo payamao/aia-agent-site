@@ -1,0 +1,333 @@
+---
+import {
+  BadgeCheck,
+  MessageCircle,
+  Phone,
+} from "lucide-astro";
+import { getCollection } from "astro:content";
+import BlogCard from "@/components/BlogCard.astro";
+import Fact from "@/components/Fact.astro";
+import Faq from "@/components/Faq.astro";
+import LeadForm from "@/components/LeadForm.astro";
+import PlanIcon from "@/components/PlanIcon.astro";
+import PlanList from "@/components/PlanList.astro";
+import Step from "@/components/Step.astro";
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import { sortPosts } from "@/lib/blog";
+import { site } from "@/site";
+
+export const prerender = true;
+
+const posts = sortPosts(await getCollection("blog")).slice(0, 3);
+const schema = [
+  {
+    "@context": "https://schema.org",
+    "@type": "InsuranceAgency",
+    name: `${site.name} - ${site.role}`,
+    url: site.url,
+    telephone: site.phoneDisplay,
+    areaServed: site.area,
+    description: site.description,
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    mainEntity: [
+      {
+        "@type": "Question",
+        name: "การปรึกษามีค่าใช้จ่ายไหม?",
+        acceptedAnswer: {
+          "@type": "Answer",
+          text: "การปรึกษาวางแผนครั้งแรกฟรีและไม่มีข้อผูกมัด",
+        },
+      },
+      {
+        "@type": "Question",
+        name: "ทำประกันสุขภาพตอนอายุเท่าไหร่ดีที่สุด?",
+        acceptedAnswer: {
+          "@type": "Answer",
+          text: "โดยทั่วไปยิ่งทำเร็วเบี้ยยิ่งถูกและสุขภาพยังแข็งแรงทำให้ผ่านการพิจารณาง่ายกว่า",
+        },
+      },
+    ],
+  },
+];
+---
+
+<BaseLayout
+  title={`${site.name} · ที่ปรึกษาประกันชีวิต AIA`}
+  description={site.description}
+  schema={schema}
+>
+  <main id="top">
+    <section class="pt-[clamp(48px,6vw,80px)]">
+      <div class="container grid items-center gap-12 lg:grid-cols-[1.05fr_0.95fr] lg:gap-14">
+        <div>
+          <span class="inline-flex items-center gap-2 rounded-full bg-brand-accent-soft px-3.5 py-1.5 text-[13px] font-semibold tracking-[0.04em] text-brand-accent">
+            <span class="size-1.5 rounded-full bg-brand-accent"></span>
+            ที่ปรึกษาประกันชีวิตอิสระ · ตัวแทน AIA
+          </span>
+          <h1 class="mt-5 max-w-[14ch] text-[clamp(2.1rem,5vw,3.5rem)] font-bold leading-[1.08]">
+            วางแผนชีวิตวันนี้ เพื่อ<span class="text-brand-accent">คนที่คุณรัก</span>ในวันข้างหน้า
+          </h1>
+          <p class="mt-5 max-w-[48ch] text-[clamp(1.06rem,2vw,1.2rem)] text-brand-muted">
+            ประกันที่ดีไม่ใช่แค่กรมธรรม์ แต่คือแผนที่ออกแบบมาให้เหมาะกับชีวิตคุณจริง ๆ
+            คุยกันก่อนได้ ไม่มีค่าใช้จ่าย และไม่กดดัน
+          </p>
+          <div class="mt-7 flex flex-wrap items-center gap-3">
+            <a href="#contact" class="btn btn-primary">นัดหมายปรึกษาฟรี</a>
+            <a href={`tel:${site.phone}`} class="btn btn-ghost">โทรปรึกษา</a>
+            <span class="text-sm text-brand-muted">
+              โทร <b class="font-semibold text-brand-fg">{site.phoneDisplay}</b>
+            </span>
+          </div>
+          <div class="mt-9 flex flex-wrap gap-6">
+            <div>
+              <b class="block text-[22px] font-bold">{site.agentCode}</b>
+              <span class="text-[13px] text-brand-muted">รหัสตัวแทนที่ขึ้นทะเบียน</span>
+            </div>
+            <div>
+              <b class="block text-[22px] font-bold">ฟรี</b>
+              <span class="text-[13px] text-brand-muted">การปรึกษาวางแผนครั้งแรก</span>
+            </div>
+            <div>
+              <b class="block text-[22px] font-bold">เฉพาะคุณ</b>
+              <span class="text-[13px] text-brand-muted">แผนที่ออกแบบเป็นรายบุคคล</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="max-w-[440px] rounded-3xl border border-brand-border bg-white p-4 shadow-[0_24px_60px_oklch(27%_0.055_258/.1)] sm:p-6">
+          <div class="relative aspect-[4/5] overflow-hidden rounded-2xl bg-brand-navy">
+            <img
+              src="/images/consultation-hero.png"
+              alt="บรรยากาศการปรึกษาวางแผนประกันชีวิต"
+              class="h-full w-full object-cover"
+              loading="eager"
+              decoding="async"
+            />
+            <div class="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/75 via-black/25 to-transparent p-5 text-white">
+              <div class="mb-3 inline-flex items-center gap-1 rounded-full border border-white/25 bg-white/15 px-3 py-1 text-[11.5px] font-semibold backdrop-blur">
+                <BadgeCheck class="size-3.5" aria-hidden="true" />
+                ตัวแทน AIA
+              </div>
+              <div class="text-[21px] font-bold">{site.name}</div>
+              <div class="mt-1 text-[13.5px] text-white/80">ที่ปรึกษาการเงินและการประกันชีวิต</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="relative overflow-hidden bg-brand-navy text-white">
+      <div class="absolute -right-28 -top-28 size-96 rounded-full bg-[radial-gradient(circle,oklch(55%_0.2_25/.35),transparent_70%)]"></div>
+      <div class="container relative">
+        <blockquote class="max-w-[18ch] font-serif text-[clamp(1.5rem,3.6vw,2.5rem)] font-semibold leading-[1.35]">
+          “ผมออกจากธุรกิจที่บ้าน เพราะอยากให้คนไทย<span class="text-brand-gold">เห็นคุณค่าของประกันชีวิต</span>
+          — คนส่วนใหญ่ยังไม่มี หรือมีแล้วแต่ทำไม่ถูก ผมอยากเปลี่ยนเรื่องนั้น”
+        </blockquote>
+        <div class="mt-8 flex items-center gap-3.5">
+          <span class="grid size-11 place-items-center rounded-[11px] bg-white/10 font-bold text-brand-gold">จ</span>
+          <div>
+            <b class="text-[15.5px]">{site.name}</b>
+            <span class="block text-[13.5px] text-white/60">ที่ปรึกษาประกันชีวิต · รหัสตัวแทน {site.agentCode}</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="plans">
+      <div class="container">
+        <div class="section-head">
+          <span class="kicker">แผนความคุ้มครอง</span>
+          <h2>เริ่มจากสิ่งที่คุณต้องการจริง ๆ</h2>
+          <p>
+            ทุกแผนเริ่มต้นจากการเข้าใจชีวิตและงบประมาณของคุณก่อน
+            รายละเอียดความคุ้มครองและเบี้ยขึ้นอยู่กับเงื่อนไขกรมธรรม์จริงและการพิจารณารับประกัน
+          </p>
+        </div>
+
+        <div class="grid gap-5 md:grid-cols-3">
+          <article class="relative rounded-2xl border border-brand-accent bg-white p-7 shadow-[0_18px_44px_oklch(55%_0.2_25/.12)]">
+            <span class="absolute right-5 top-[-11px] rounded-full bg-brand-accent px-3 py-1 text-[11.5px] font-semibold text-white">
+              ที่ผมถนัด
+            </span>
+            <PlanIcon icon="health" />
+            <h3 class="text-[19px] font-semibold">ประกันสุขภาพ</h3>
+            <p class="mt-2 text-[15px] text-brand-muted">
+              คุ้มครองค่ารักษาพยาบาลทั้งผู้ป่วยในและผู้ป่วยนอก ให้คุณไม่ต้องกังวลค่าใช้จ่ายยามเจ็บป่วย
+            </p>
+            <PlanList items={["เหมาจ่ายค่ารักษาตามจริง", "เลือกวงเงินได้ตามงบ", "ครอบคลุมโรคร้ายแรง"]} />
+          </article>
+
+          <article class="rounded-2xl border border-brand-border bg-white p-7 transition hover:-translate-y-1 hover:border-transparent hover:shadow-[0_18px_44px_oklch(27%_0.055_258/.12)]">
+            <PlanIcon icon="life" />
+            <h3 class="text-[19px] font-semibold">ประกันชีวิต</h3>
+            <p class="mt-2 text-[15px] text-brand-muted">
+              หลักประกันให้ครอบครัวเดินต่อได้ ไม่ว่าจะเกิดอะไรขึ้น พร้อมตัวเลือกแบบมีเงินคืน
+            </p>
+            <PlanList items={["คุ้มครองชีวิตระยะยาว", "ลดหย่อนภาษีได้", "ส่งต่อความมั่นคงให้ลูกหลาน"]} />
+          </article>
+
+          <article class="rounded-2xl border border-brand-border bg-white p-7 transition hover:-translate-y-1 hover:border-transparent hover:shadow-[0_18px_44px_oklch(27%_0.055_258/.12)]">
+            <PlanIcon icon="saving" />
+            <h3 class="text-[19px] font-semibold">ออมทรัพย์ & บำนาญ</h3>
+            <p class="mt-2 text-[15px] text-brand-muted">
+              สร้างวินัยการออมระยะยาว เตรียมเงินก้อนไว้ใช้ในวันเกษียณอย่างสบายใจ
+            </p>
+            <PlanList items={["ออมแบบมีเป้าหมายชัดเจน", "การันตีผลตอบแทนบางแบบ", "วางแผนเกษียณล่วงหน้า"]} />
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="about" class="bg-brand-surface-2">
+      <div class="container grid items-center gap-10 lg:grid-cols-[0.9fr_1.1fr] lg:gap-14">
+        <div class="overflow-hidden rounded-[20px] border border-brand-border bg-white">
+          <img
+            src="/images/consultation-hero.png"
+            alt="การเตรียมข้อมูลก่อนวางแผนประกัน"
+            class="aspect-square h-full w-full object-cover"
+            loading="lazy"
+          />
+        </div>
+        <div>
+          <span class="kicker">เกี่ยวกับผม</span>
+          <h2 class="mt-3 text-[clamp(1.62rem,3.4vw,2.25rem)] font-bold leading-tight">
+            ที่ปรึกษาที่อยากให้คุณ “เข้าใจ” ก่อนตัดสินใจ
+          </h2>
+          <div class="mt-5 space-y-3.5 text-[16.5px] text-brand-muted">
+            <p>
+              ผมชื่อ {site.name} ตัดสินใจออกจากธุรกิจที่บ้านมาเป็นที่ปรึกษาประกันชีวิตเต็มตัว
+              เพราะเห็นว่าคนไทยจำนวนมากยังไม่มีหลักประกัน หรือมีแล้วแต่ทำไว้ไม่ตรงกับความต้องการจริง
+            </p>
+            <p>
+              ผมไม่ได้ตั้งใจขายให้ครบทุกแบบ แต่ตั้งใจให้คุณเข้าใจว่าแผนไหนเหมาะกับชีวิตและงบของคุณจริง ๆ
+              คุยกันตรงไปตรงมา ไม่กดดัน และดูแลกันต่อหลังทำกรมธรรม์
+            </p>
+          </div>
+          <div class="mt-7 grid gap-3.5 sm:grid-cols-2">
+            <Fact title={`รหัสตัวแทน ${site.agentCode}`} text="ขึ้นทะเบียนตัวแทน AIA" />
+            <Fact title={`โทร ${site.phoneDisplay}`} text="ติดต่อได้โดยตรง" />
+            <Fact title="ปรึกษาฟรี" text="ไม่มีค่าใช้จ่ายและไม่ผูกมัด" />
+            <Fact title="ดูแลต่อเนื่อง" text="ช่วยตั้งแต่เลือกแผนถึงเคลม" />
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="process">
+      <div class="container">
+        <div class="section-head center">
+          <span class="kicker">ขั้นตอนง่าย ๆ</span>
+          <h2>เริ่มต้นวางแผนใน 4 ขั้นตอน</h2>
+        </div>
+        <div class="grid gap-8 sm:grid-cols-2 lg:grid-cols-4">
+          <Step index="01" title="นัดหมาย" text="กรอกฟอร์มหรือโทรหาผม เลือกช่องทางและเวลาที่คุณสะดวก" />
+          <Step index="02" title="พูดคุยทำความเข้าใจ" text="เล่าเรื่องชีวิต งบประมาณ และสิ่งที่กังวล เพื่อให้แผนตรงกับคุณ" />
+          <Step index="03" title="เสนอแผนที่เหมาะ" text="ผมสรุปทางเลือกพร้อมข้อดีข้อจำกัดอย่างตรงไปตรงมา" />
+          <Step index="04" title="ตัดสินใจ & ดูแลต่อ" text="เลือกเมื่อพร้อม และผมดูแลคุณต่อไปจนถึงวันเคลม" />
+        </div>
+      </div>
+    </section>
+
+    <section id="blog" class="bg-brand-surface-2">
+      <div class="container">
+        <div class="section-head">
+          <span class="kicker">บทความ</span>
+          <h2>เรื่องประกันสุขภาพ เข้าใจง่าย</h2>
+          <p>
+            ความรู้เรื่องประกันสุขภาพและการวางแผนการเงิน
+            ที่ตั้งใจเขียนให้อ่านเข้าใจได้จริง และเหมาะกับการค้นหาผ่าน Google
+          </p>
+        </div>
+        <div class="grid gap-6 md:grid-cols-3">
+          {posts.map((post) => <BlogCard post={post} />)}
+        </div>
+        <div class="mt-8">
+          <a href="/blog" class="btn btn-ghost w-auto">ดูบทความทั้งหมด</a>
+        </div>
+      </div>
+    </section>
+
+    <section id="contact" class="bg-brand-surface-2">
+      <div class="container grid items-start gap-10 lg:grid-cols-[0.85fr_1.15fr] lg:gap-12">
+        <div>
+          <span class="kicker">นัดหมาย</span>
+          <h2 class="mt-3 text-[clamp(1.62rem,3.4vw,2.25rem)] font-bold leading-tight">
+            เริ่มต้นด้วยการคุยกันก่อน
+          </h2>
+          <p class="mt-4 text-[16.5px] text-brand-muted">
+            ฝากข้อมูลไว้ ผมจะติดต่อกลับเพื่อนัดเวลาปรึกษาที่คุณสะดวก ฟรีและไม่มีข้อผูกมัดใด ๆ
+          </p>
+          <div class="mt-7 space-y-3.5">
+            <a href={`tel:${site.phone}`} class="flex items-center gap-3.5 rounded-[13px] border border-brand-border bg-white p-4">
+              <span class="grid size-10 shrink-0 place-items-center rounded-[11px] bg-brand-accent-soft text-brand-accent">
+                <Phone class="size-5" aria-hidden="true" />
+              </span>
+              <span>
+                <b class="block text-[15px]">{site.phoneDisplay}</b>
+                <span class="block text-[13px] text-brand-muted">โทรหรือส่งข้อความได้เลย</span>
+              </span>
+            </a>
+            <div class="flex items-center gap-3.5 rounded-[13px] border border-brand-border bg-white p-4 opacity-90">
+              <span class="grid size-10 shrink-0 place-items-center rounded-[11px] bg-[oklch(73%_0.11_78/.18)] text-[oklch(55%_0.11_78)]">
+                <MessageCircle class="size-5" aria-hidden="true" />
+              </span>
+              <span>
+                <b class="block text-[15px]">LINE Official / Messaging API</b>
+                <span class="block text-[13px] text-brand-muted">รับแจ้งเตือน lead จากฟอร์มโดยตรง</span>
+              </span>
+            </div>
+          </div>
+        </div>
+        <LeadForm />
+      </div>
+    </section>
+
+    <section id="faq">
+      <div class="container">
+        <div class="section-head center">
+          <span class="kicker">คำถามที่พบบ่อย</span>
+          <h2>เรื่องที่หลายคนสงสัย</h2>
+        </div>
+        <div class="mx-auto max-w-[760px] divide-y divide-brand-border">
+          <Faq question="การปรึกษามีค่าใช้จ่ายไหม?">
+            ไม่มีครับ การปรึกษาวางแผนครั้งแรกฟรีและไม่มีข้อผูกมัด
+            คุณจะตัดสินใจทำหรือไม่ก็ได้หลังเข้าใจทางเลือกทั้งหมดแล้ว
+          </Faq>
+          <Faq question="ทำประกันสุขภาพตอนอายุเท่าไหร่ดีที่สุด?">
+            โดยทั่วไปยิ่งทำเร็วเบี้ยยิ่งถูกและสุขภาพยังแข็งแรงทำให้ผ่านการพิจารณาง่ายกว่า
+            แต่แผนที่เหมาะขึ้นอยู่กับสถานการณ์ของแต่ละคน เรามาดูด้วยกันได้
+          </Faq>
+          <Faq question="มีประกันกลุ่มจากบริษัทแล้ว ยังต้องทำเพิ่มไหม?">
+            ประกันกลุ่มมักคุ้มครองเฉพาะช่วงที่ยังทำงานและวงเงินจำกัด
+            การมีประกันส่วนตัวช่วยอุดช่องว่างและติดตัวคุณไปได้แม้เปลี่ยนงาน
+          </Faq>
+          <Faq question="ทำกรมธรรม์แล้วดูแลต่อยังไง?">
+            ผมดูแลคุณต่อเนื่อง ตั้งแต่ช่วยทบทวนความคุ้มครองเมื่อชีวิตเปลี่ยน
+            ไปจนถึงให้คำแนะนำและช่วยประสานงานเรื่องการเคลม
+          </Faq>
+        </div>
+      </div>
+    </section>
+
+    <section class="relative overflow-hidden bg-brand-navy text-center text-white">
+      <div class="absolute left-1/2 top-[-160px] size-[520px] -translate-x-1/2 rounded-full bg-[radial-gradient(circle,oklch(55%_0.2_25/.3),transparent_65%)]"></div>
+      <div class="container relative">
+        <h2 class="mx-auto max-w-[16ch] text-[clamp(1.75rem,4vw,2.75rem)] font-bold leading-tight">
+          หลักประกันที่ดี เริ่มจากการคุยกันก่อน
+        </h2>
+        <p class="mx-auto mt-4 max-w-[46ch] text-[17px] text-white/70">
+          ไม่ต้องตัดสินใจวันนี้ แค่มาทำความเข้าใจทางเลือกของคุณ ฟรีและไม่มีข้อผูกมัด
+        </p>
+        <div class="mt-7 flex flex-wrap justify-center gap-3">
+          <a href="#contact" class="btn btn-light">นัดหมายปรึกษาฟรี</a>
+          <a href={`tel:${site.phone}`} class="btn border-white/30 text-white hover:border-white">
+            โทร {site.phoneDisplay}
+          </a>
+        </div>
+      </div>
+    </section>
+  </main>
+</BaseLayout>

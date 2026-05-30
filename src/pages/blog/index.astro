@@ -1,0 +1,37 @@
+---
+import { getCollection } from "astro:content";
+import BlogCard from "@/components/BlogCard.astro";
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import { sortPosts } from "@/lib/blog";
+import { site } from "@/site";
+
+export const prerender = true;
+
+const posts = sortPosts(await getCollection("blog"));
+---
+
+<BaseLayout
+  title={`บทความประกันสุขภาพและวางแผนการเงิน · ${site.name}`}
+  description="รวมบทความ SEO เรื่องประกันสุขภาพ ประกันชีวิต และการวางแผนการเงิน อ่านเข้าใจง่ายสำหรับคนเริ่มต้น"
+  canonical={`${site.url}/blog/`}
+>
+  <main>
+    <section class="bg-brand-surface-2">
+      <div class="container">
+        <div class="section-head">
+          <span class="kicker">Blog</span>
+          <h1 class="mt-3 text-[clamp(2rem,5vw,3.2rem)] font-bold leading-tight">
+            บทความประกันสุขภาพและการวางแผนชีวิต
+          </h1>
+          <p>
+            เนื้อหาที่เขียนให้คนทั่วไปอ่านเข้าใจง่าย
+            พร้อมโครงสร้าง metadata, sitemap และ slug สำหรับ SEO ตั้งแต่ต้น
+          </p>
+        </div>
+        <div class="grid gap-6 md:grid-cols-3">
+          {posts.map((post) => <BlogCard post={post} />)}
+        </div>
+      </div>
+    </section>
+  </main>
+</BaseLayout>

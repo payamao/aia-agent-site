@@ -1,0 +1,667 @@
+
+<!doctype html>
+<html lang="th">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>จิรวัฒน์ พันธ์เกษกรณ์ · ที่ปรึกษาประกันชีวิต AIA</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Thai:wght@300;400;500;600;700&family=Noto+Serif+Thai:wght@500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg: oklch(98.5% 0.004 255);
+  --surface: oklch(100% 0 0);
+  --surface-2: oklch(96.5% 0.006 255);
+  --fg: oklch(24% 0.02 265);
+  --muted: oklch(50% 0.015 265);
+  --border: oklch(91% 0.007 265);
+  --accent: oklch(55% 0.2 25);
+  --accent-dark: oklch(46% 0.18 25);
+  --accent-soft: oklch(96% 0.03 25);
+  --navy: oklch(27% 0.055 258);
+  --navy-2: oklch(33% 0.06 258);
+  --gold: oklch(73% 0.11 78);
+  --font-body: "IBM Plex Sans Thai", -apple-system, system-ui, sans-serif;
+  --font-serif: "Noto Serif Thai", Georgia, serif;
+  --maxw: 1180px;
+  --r: 16px;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{
+  font-family:var(--font-body);
+  color:var(--fg);
+  background:var(--bg);
+  line-height:1.6;
+  font-weight:400;
+  -webkit-font-smoothing:antialiased;
+  text-wrap:pretty;
+}
+img{max-width:100%;display:block}
+a{color:inherit;text-decoration:none}
+.wrap{max-width:var(--maxw);margin:0 auto;padding:0 24px}
+section{padding:clamp(56px,8vw,104px) 0}
+
+/* ---------- nav ---------- */
+.nav{
+  position:sticky;top:0;z-index:100;
+  background:color-mix(in oklab, var(--surface) 88%, transparent);
+  backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);
+  border-bottom:1px solid var(--border);
+}
+.nav-inner{display:flex;align-items:center;justify-content:space-between;height:68px}
+.brand{display:flex;align-items:center;gap:11px;font-weight:600}
+.brand .mark{
+  width:36px;height:36px;border-radius:9px;
+  background:linear-gradient(140deg,var(--accent),var(--accent-dark));
+  display:grid;place-items:center;color:#fff;font-weight:700;font-size:17px;
+  box-shadow:0 4px 12px oklch(55% 0.2 25 / .3);
+}
+.brand .bt{font-size:15.5px;line-height:1.1}
+.brand .bt small{display:block;font-weight:400;color:var(--muted);font-size:11.5px;letter-spacing:.02em}
+.nav-links{display:flex;align-items:center;gap:30px}
+.nav-links a{font-size:15px;color:var(--muted);font-weight:500;transition:color .15s}
+.nav-links a:hover{color:var(--fg)}
+.btn{
+  display:inline-flex;align-items:center;gap:8px;justify-content:center;
+  font-family:inherit;font-weight:600;font-size:15px;cursor:pointer;
+  padding:11px 20px;border-radius:11px;border:1px solid transparent;
+  transition:transform .12s, box-shadow .15s, background .15s;white-space:nowrap;
+}
+.btn-primary{background:var(--accent);color:#fff;box-shadow:0 6px 16px oklch(55% 0.2 25 / .28)}
+.btn-primary:hover{background:var(--accent-dark);transform:translateY(-1px)}
+.btn-ghost{background:transparent;color:var(--fg);border-color:var(--border)}
+.btn-ghost:hover{border-color:var(--fg)}
+.btn-light{background:#fff;color:var(--navy)}
+.btn-light:hover{transform:translateY(-1px);box-shadow:0 8px 20px rgba(0,0,0,.2)}
+.nav-cta{display:flex;align-items:center;gap:12px}
+.burger{display:none;width:42px;height:42px;border:1px solid var(--border);border-radius:10px;background:var(--surface);cursor:pointer;flex-direction:column;gap:4.5px;align-items:center;justify-content:center}
+.burger span{width:18px;height:2px;background:var(--fg);border-radius:2px;transition:.2s}
+
+/* ---------- hero ---------- */
+.hero{padding-top:clamp(48px,6vw,80px)}
+.hero-grid{display:grid;grid-template-columns:1.05fr .95fr;gap:56px;align-items:center}
+.eyebrow{display:inline-flex;align-items:center;gap:8px;font-size:13px;font-weight:600;letter-spacing:.04em;color:var(--accent);background:var(--accent-soft);padding:6px 13px;border-radius:999px;margin-bottom:22px}
+.eyebrow .dot{width:7px;height:7px;border-radius:50%;background:var(--accent)}
+h1{font-size:clamp(34px,5vw,56px);line-height:1.08;font-weight:700;letter-spacing:-.01em}
+h1 em{font-style:normal;color:var(--accent)}
+.hero p.lead{font-size:clamp(17px,2vw,19px);color:var(--muted);margin:22px 0 30px;max-width:48ch}
+.hero-actions{display:flex;gap:13px;flex-wrap:wrap;align-items:center}
+.hero-actions .callnote{font-size:14px;color:var(--muted)}
+.hero-actions .callnote b{color:var(--fg);font-variant-numeric:tabular-nums}
+.trust-row{display:flex;gap:26px;margin-top:38px;flex-wrap:wrap}
+.trust-row .ti{display:flex;flex-direction:column}
+.trust-row .ti b{font-size:22px;font-weight:700;color:var(--fg)}
+.trust-row .ti span{font-size:13px;color:var(--muted)}
+
+.hero-card{
+  background:var(--surface);border:1px solid var(--border);border-radius:24px;
+  padding:24px;box-shadow:0 24px 60px oklch(27% 0.055 258 / .1);position:relative;overflow:hidden;
+}
+.portrait{
+  aspect-ratio:4/5;border-radius:16px;background:
+    linear-gradient(160deg, var(--navy), var(--navy-2));
+  display:flex;flex-direction:column;justify-content:flex-end;padding:22px;color:#fff;position:relative;overflow:hidden;
+}
+.portrait::before{content:"";position:absolute;inset:0;background:
+  radial-gradient(120% 90% at 80% 0%, oklch(55% 0.2 25 / .35), transparent 55%);}
+.portrait .ph-label{position:absolute;top:18px;left:0;right:0;text-align:center;font-size:13px;color:oklch(100% 0 0 / .55);letter-spacing:.02em}
+.portrait .pinfo{position:relative;z-index:1}
+.portrait .pinfo .nm{font-size:21px;font-weight:700}
+.portrait .pinfo .rl{font-size:13.5px;color:oklch(100% 0 0 / .75);margin-top:3px}
+.portrait .badge{position:absolute;top:16px;right:16px;background:oklch(100% 0 0 / .14);backdrop-filter:blur(6px);border:1px solid oklch(100% 0 0 / .2);color:#fff;font-size:11.5px;font-weight:600;padding:5px 11px;border-radius:999px;z-index:1}
+
+/* ---------- section heads ---------- */
+.shead{max-width:640px;margin-bottom:48px}
+.shead.center{margin-left:auto;margin-right:auto;text-align:center}
+.kicker{font-size:13px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--accent)}
+.shead h2{font-size:clamp(26px,3.4vw,38px);font-weight:700;line-height:1.15;margin-top:12px;letter-spacing:-.01em}
+.shead p{color:var(--muted);margin-top:14px;font-size:16.5px}
+
+/* ---------- mission band ---------- */
+.mission{background:var(--navy);color:#fff;position:relative;overflow:hidden}
+.mission::after{content:"";position:absolute;right:-120px;top:-120px;width:380px;height:380px;border-radius:50%;background:radial-gradient(circle,oklch(55% 0.2 25 / .35),transparent 70%)}
+.mission .wrap{position:relative;z-index:1}
+.quote{font-family:var(--font-serif);font-size:clamp(24px,3.6vw,40px);line-height:1.35;font-weight:600;max-width:18ch;}
+.quote .hl{color:var(--gold)}
+.mission .qfooter{display:flex;align-items:center;gap:14px;margin-top:34px}
+.mission .qfooter .qmark{width:44px;height:44px;border-radius:11px;background:oklch(100% 0 0 / .1);display:grid;place-items:center;font-weight:700;color:var(--gold)}
+.mission .qfooter b{font-size:15.5px}
+.mission .qfooter span{font-size:13.5px;color:oklch(100% 0 0 / .6);display:block}
+
+/* ---------- plans ---------- */
+.cards{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
+.pcard{
+  background:var(--surface);border:1px solid var(--border);border-radius:var(--r);
+  padding:30px 26px;transition:transform .18s, box-shadow .18s, border-color .18s;position:relative;
+}
+.pcard:hover{transform:translateY(-4px);box-shadow:0 18px 44px oklch(27% 0.055 258 / .12);border-color:transparent}
+.pcard.feature{border-color:var(--accent);box-shadow:0 18px 44px oklch(55% 0.2 25 / .12)}
+.pcard .tag{position:absolute;top:-11px;right:22px;background:var(--accent);color:#fff;font-size:11.5px;font-weight:600;padding:4px 12px;border-radius:999px}
+.picon{width:46px;height:46px;border-radius:12px;background:var(--accent-soft);color:var(--accent);display:grid;place-items:center;margin-bottom:18px}
+.picon svg{width:24px;height:24px}
+.pcard h3{font-size:19px;font-weight:600}
+.pcard p{color:var(--muted);font-size:15px;margin-top:9px}
+.pcard ul{list-style:none;margin-top:18px;display:flex;flex-direction:column;gap:9px}
+.pcard li{display:flex;gap:9px;font-size:14.5px;align-items:flex-start}
+.pcard li svg{width:17px;height:17px;color:var(--accent);flex-shrink:0;margin-top:3px}
+
+/* ---------- about ---------- */
+.about-grid{display:grid;grid-template-columns:.9fr 1.1fr;gap:54px;align-items:center}
+.about-photo{aspect-ratio:1/1;border-radius:20px;background:linear-gradient(160deg,var(--surface-2),var(--bg));border:1px solid var(--border);display:grid;place-items:center;color:var(--muted);font-size:14px;text-align:center;padding:24px}
+.about-grid h2{font-size:clamp(26px,3.4vw,36px);font-weight:700;letter-spacing:-.01em}
+.about-grid .body{margin-top:18px;color:var(--muted);font-size:16.5px}
+.about-grid .body p+p{margin-top:14px}
+.factgrid{display:grid;grid-template-columns:repeat(2,1fr);gap:14px;margin-top:28px}
+.fact{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:16px 18px}
+.fact b{font-size:15px}
+.fact span{display:block;font-size:13px;color:var(--muted);margin-top:2px}
+
+/* ---------- process ---------- */
+.steps{display:grid;grid-template-columns:repeat(4,1fr);gap:20px;counter-reset:s}
+.step{position:relative;padding-top:18px}
+.step::before{counter-increment:s;content:"0" counter(s);font-family:var(--font-serif);font-size:34px;font-weight:700;color:var(--accent);opacity:.9}
+.step h4{font-size:17px;font-weight:600;margin-top:8px}
+.step p{font-size:14.5px;color:var(--muted);margin-top:7px}
+
+/* ---------- blog ---------- */
+.blog-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
+.bcard{background:var(--surface);border:1px solid var(--border);border-radius:var(--r);overflow:hidden;transition:transform .18s,box-shadow .18s;display:flex;flex-direction:column}
+.bcard:hover{transform:translateY(-4px);box-shadow:0 18px 44px oklch(27% 0.055 258 / .12)}
+.bcover{aspect-ratio:16/9;background:linear-gradient(150deg,var(--navy),var(--navy-2));position:relative;display:grid;place-items:center}
+.bcover.c2{background:linear-gradient(150deg,var(--accent-dark),var(--accent))}
+.bcover.c3{background:linear-gradient(150deg,oklch(40% 0.07 200),oklch(52% 0.1 200))}
+.bcover span{color:oklch(100% 0 0 / .85);font-size:13px;font-weight:600;letter-spacing:.04em;border:1px solid oklch(100% 0 0 / .3);padding:5px 12px;border-radius:999px}
+.bbody{padding:22px 22px 24px;display:flex;flex-direction:column;flex:1}
+.bmeta{font-size:12.5px;color:var(--muted);letter-spacing:.02em}
+.bbody h3{font-size:18px;font-weight:600;margin-top:10px;line-height:1.35}
+.bbody p{font-size:14.5px;color:var(--muted);margin-top:10px;flex:1}
+.bbody .more{margin-top:16px;font-size:14px;font-weight:600;color:var(--accent);display:inline-flex;align-items:center;gap:6px}
+
+/* ---------- form / contact ---------- */
+.contact{background:var(--surface-2)}
+.contact-grid{display:grid;grid-template-columns:.85fr 1.15fr;gap:48px;align-items:start}
+.contact-info h2{font-size:clamp(26px,3.4vw,36px);font-weight:700;letter-spacing:-.01em}
+.contact-info p{color:var(--muted);margin-top:16px;font-size:16.5px}
+.cmethods{margin-top:30px;display:flex;flex-direction:column;gap:14px}
+.cmethod{display:flex;gap:14px;align-items:center;background:var(--surface);border:1px solid var(--border);border-radius:13px;padding:15px 18px}
+.cmethod .ci{width:42px;height:42px;border-radius:11px;background:var(--accent-soft);color:var(--accent);display:grid;place-items:center;flex-shrink:0}
+.cmethod .ci svg{width:21px;height:21px}
+.cmethod b{font-size:15px;font-variant-numeric:tabular-nums}
+.cmethod span{display:block;font-size:13px;color:var(--muted)}
+.cmethod.soon{opacity:.85}
+.cmethod.soon .ci{background:oklch(73% 0.11 78 / .18);color:oklch(55% 0.11 78)}
+.soon-pill{margin-left:auto;font-size:11px;font-weight:600;color:oklch(50% 0.11 78);background:oklch(73% 0.11 78 / .16);padding:4px 10px;border-radius:999px;white-space:nowrap}
+
+.formcard{background:var(--surface);border:1px solid var(--border);border-radius:20px;padding:clamp(24px,3vw,36px);box-shadow:0 20px 50px oklch(27% 0.055 258 / .08)}
+.formcard h3{font-size:21px;font-weight:700}
+.formcard .fsub{color:var(--muted);font-size:14.5px;margin-top:6px;margin-bottom:24px}
+.field{margin-bottom:18px}
+.field label{display:block;font-size:14px;font-weight:600;margin-bottom:7px}
+.field label .req{color:var(--accent)}
+.field input,.field select,.field textarea{
+  width:100%;font-family:inherit;font-size:15px;color:var(--fg);
+  padding:12px 14px;border:1px solid var(--border);border-radius:11px;background:var(--surface);transition:border-color .15s, box-shadow .15s;
+}
+.field input:focus,.field select:focus,.field textarea:focus{outline:none;border-color:var(--accent);box-shadow:0 0 0 3px var(--accent-soft)}
+.field textarea{resize:vertical;min-height:92px}
+.field .err{color:var(--accent);font-size:12.5px;margin-top:6px;display:none}
+.field.invalid input,.field.invalid select{border-color:var(--accent)}
+.field.invalid .err{display:block}
+.row2{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.radio-pills{display:flex;gap:10px}
+.radio-pills label{flex:1;text-align:center;border:1px solid var(--border);border-radius:11px;padding:11px;font-size:14px;font-weight:500;cursor:pointer;transition:.15s;user-select:none}
+.radio-pills input{display:none}
+.radio-pills input:checked+span{color:var(--accent)}
+.radio-pills label:has(input:checked){border-color:var(--accent);background:var(--accent-soft);color:var(--accent);font-weight:600}
+.form-success{display:none;text-align:center;padding:30px 10px}
+.form-success.show{display:block}
+.form-success .ok{width:62px;height:62px;border-radius:50%;background:oklch(60% 0.14 150 / .15);color:oklch(48% 0.14 150);display:grid;place-items:center;margin:0 auto 18px}
+.form-success h3{font-size:22px}
+.form-success p{color:var(--muted);margin-top:10px;font-size:15px}
+.consent{font-size:12.5px;color:var(--muted);margin-top:6px;line-height:1.5}
+
+/* ---------- faq ---------- */
+.faq-wrap{max-width:760px;margin:0 auto}
+.faq-item{border-bottom:1px solid var(--border)}
+.faq-q{width:100%;background:none;border:none;font-family:inherit;text-align:left;padding:22px 0;font-size:17px;font-weight:600;color:var(--fg);cursor:pointer;display:flex;justify-content:space-between;align-items:center;gap:16px}
+.faq-q .ic{width:26px;height:26px;flex-shrink:0;position:relative}
+.faq-q .ic::before,.faq-q .ic::after{content:"";position:absolute;background:var(--accent);border-radius:2px;transition:.2s}
+.faq-q .ic::before{width:14px;height:2px;top:12px;left:6px}
+.faq-q .ic::after{width:2px;height:14px;top:6px;left:12px}
+.faq-item.open .faq-q .ic::after{transform:rotate(90deg);opacity:0}
+.faq-a{max-height:0;overflow:hidden;transition:max-height .25s ease;color:var(--muted);font-size:15.5px}
+.faq-a div{padding:0 0 22px}
+.faq-item.open .faq-a{max-height:260px}
+
+/* ---------- final cta ---------- */
+.finalcta{background:var(--navy);color:#fff;text-align:center;position:relative;overflow:hidden}
+.finalcta::before{content:"";position:absolute;left:50%;top:-160px;transform:translateX(-50%);width:520px;height:520px;border-radius:50%;background:radial-gradient(circle,oklch(55% 0.2 25 / .3),transparent 65%)}
+.finalcta .wrap{position:relative;z-index:1}
+.finalcta h2{font-size:clamp(28px,4vw,44px);font-weight:700;max-width:16ch;margin:0 auto;letter-spacing:-.01em}
+.finalcta p{color:oklch(100% 0 0 / .7);margin:18px auto 30px;max-width:46ch;font-size:17px}
+.finalcta .hero-actions{justify-content:center}
+
+/* ---------- footer ---------- */
+footer{background:oklch(20% 0.04 258);color:oklch(100% 0 0 / .7);padding:54px 0 40px;font-size:14px}
+.foot-top{display:flex;justify-content:space-between;gap:30px;flex-wrap:wrap;padding-bottom:30px;border-bottom:1px solid oklch(100% 0 0 / .12)}
+.foot-brand b{color:#fff;font-size:17px}
+.foot-brand p{margin-top:8px;max-width:38ch;line-height:1.6}
+.foot-cols{display:flex;gap:54px;flex-wrap:wrap}
+.foot-col h5{color:#fff;font-size:13px;letter-spacing:.06em;text-transform:uppercase;margin-bottom:13px}
+.foot-col a{display:block;padding:5px 0;color:oklch(100% 0 0 / .65);transition:.15s}
+.foot-col a:hover{color:#fff}
+.foot-bottom{padding-top:24px;font-size:12.5px;color:oklch(100% 0 0 / .5);line-height:1.7}
+.foot-bottom .disc{margin-top:10px}
+
+/* ---------- responsive ---------- */
+@media (max-width:900px){
+  .hero-grid,.about-grid,.contact-grid{grid-template-columns:1fr;gap:36px}
+  .hero-card{max-width:420px}
+  .cards,.blog-grid{grid-template-columns:1fr 1fr}
+  .steps{grid-template-columns:1fr 1fr;gap:30px 20px}
+  .nav-links{display:none}
+  .nav-cta .btn-ghost{display:none}
+  .burger{display:flex}
+  .mobile-open .nav-links{
+    display:flex;flex-direction:column;position:absolute;top:68px;left:0;right:0;
+    background:var(--surface);border-bottom:1px solid var(--border);padding:18px 24px;gap:4px;align-items:stretch;
+  }
+  .mobile-open .nav-links a{padding:11px 0;font-size:16px}
+}
+@media (max-width:600px){
+  .cards,.blog-grid,.factgrid,.steps,.row2,.radio-pills{grid-template-columns:1fr}
+  .radio-pills{flex-direction:column}
+  .trust-row{gap:18px}
+  .foot-cols{gap:30px}
+  .step{padding-top:6px}
+}
+</style>
+</head>
+<body>
+
+<!-- ============ NAV ============ -->
+<header class="nav" id="nav">
+  <div class="wrap nav-inner">
+    <a href="#top" class="brand">
+      <span class="mark">จ</span>
+      <span class="bt">จิรวัฒน์ พันธ์เกษกรณ์<small>ที่ปรึกษาประกันชีวิต · AIA</small></span>
+    </a>
+    <nav class="nav-links" id="navLinks">
+      <a href="#plans">แผนความคุ้มครอง</a>
+      <a href="#about">เกี่ยวกับผม</a>
+      <a href="#process">ขั้นตอน</a>
+      <a href="#blog">บทความ</a>
+      <a href="#faq">คำถามที่พบบ่อย</a>
+    </nav>
+    <div class="nav-cta">
+      <a href="tel:0997702627" class="btn btn-ghost">โทรเลย</a>
+      <a href="#contact" class="btn btn-primary">นัดหมายปรึกษาฟรี</a>
+      <button class="burger" id="burger" aria-label="เมนู"><span></span><span></span><span></span></button>
+    </div>
+  </div>
+</header>
+
+<main id="top">
+
+<!-- ============ HERO ============ -->
+<section class="hero">
+  <div class="wrap hero-grid">
+    <div class="hero-text">
+      <span class="eyebrow"><span class="dot"></span>ที่ปรึกษาประกันชีวิตอิสระ · ตัวแทน AIA</span>
+      <h1>วางแผนชีวิตวันนี้ เพื่อ<em>คนที่คุณรัก</em>ในวันข้างหน้า</h1>
+      <p class="lead">ผมเชื่อว่าประกันที่ดีไม่ใช่แค่กรมธรรม์ แต่คือแผนที่ออกแบบมาให้เหมาะกับชีวิตคุณจริง ๆ มาคุยกันก่อนได้ ไม่มีค่าใช้จ่าย และไม่กดดัน</p>
+      <div class="hero-actions">
+        <a href="#contact" class="btn btn-primary">นัดหมายปรึกษาฟรี</a>
+        <a href="tel:0997702627" class="btn btn-ghost">โทรปรึกษา</a>
+        <span class="callnote">โทร <b>099-770-2627</b></span>
+      </div>
+      <div class="trust-row">
+        <div class="ti"><b>685253</b><span>รหัสตัวแทนที่ขึ้นทะเบียน</span></div>
+        <div class="ti"><b>ฟรี</b><span>การปรึกษาวางแผนครั้งแรก</span></div>
+        <div class="ti"><b>เฉพาะคุณ</b><span>แผนที่ออกแบบเป็นรายบุคคล</span></div>
+      </div>
+    </div>
+    <div class="hero-card">
+      <div class="portrait">
+        <span class="ph-label">ใส่รูปถ่ายของคุณที่นี่</span>
+        <span class="badge">★ ตัวแทน AIA</span>
+        <div class="pinfo">
+          <div class="nm">จิรวัฒน์ พันธ์เกษกรณ์</div>
+          <div class="rl">ที่ปรึกษาการเงินและการประกันชีวิต</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ MISSION ============ -->
+<section class="mission">
+  <div class="wrap">
+    <blockquote class="quote">
+      “ผมออกจากธุรกิจที่บ้าน เพราะอยากให้คนไทย<span class="hl">เห็นคุณค่าของประกันชีวิต</span> — คนส่วนใหญ่ยังไม่มี หรือมีแล้วแต่ทำไม่ถูก ผมอยากเปลี่ยนเรื่องนั้น”
+    </blockquote>
+    <div class="qfooter">
+      <span class="qmark">จ</span>
+      <div>
+        <b>จิรวัฒน์ พันธ์เกษกรณ์</b>
+        <span>ที่ปรึกษาประกันชีวิต · รหัสตัวแทน 685253</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ PLANS ============ -->
+<section id="plans">
+  <div class="wrap">
+    <div class="shead">
+      <span class="kicker">แผนความคุ้มครอง</span>
+      <h2>เริ่มจากสิ่งที่คุณต้องการจริง ๆ</h2>
+      <p>ทุกแผนเริ่มต้นจากการเข้าใจชีวิตและงบประมาณของคุณก่อน รายละเอียดความคุ้มครองและเบี้ยขึ้นอยู่กับเงื่อนไขกรมธรรม์จริงและการพิจารณารับประกัน</p>
+    </div>
+    <div class="cards">
+      <div class="pcard feature">
+        <span class="tag">ที่ผมถนัด</span>
+        <div class="picon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 12h4l2 5 4-12 2 7h6"/></svg></div>
+        <h3>ประกันสุขภาพ</h3>
+        <p>คุ้มครองค่ารักษาพยาบาลทั้งผู้ป่วยในและผู้ป่วยนอก ให้คุณไม่ต้องกังวลค่าใช้จ่ายยามเจ็บป่วย</p>
+        <ul>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg>เหมาจ่ายค่ารักษาตามจริง</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg>เลือกวงเงินได้ตามงบ</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg>ครอบคลุมโรคร้ายแรง</li>
+        </ul>
+      </div>
+      <div class="pcard">
+        <div class="picon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M12 21s-7-4.5-9.5-9C.8 8.4 2.5 5 6 5c2 0 3.3 1.2 6 4 2.7-2.8 4-4 6-4 3.5 0 5.2 3.4 3.5 7-2.5 4.5-9.5 9-9.5 9z"/></svg></div>
+        <h3>ประกันชีวิต</h3>
+        <p>หลักประกันให้ครอบครัวเดินต่อได้ ไม่ว่าจะเกิดอะไรขึ้น พร้อมตัวเลือกแบบมีเงินคืน</p>
+        <ul>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg>คุ้มครองชีวิตระยะยาว</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg>ลดหย่อนภาษีได้</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg>ส่งต่อความมั่นคงให้ลูกหลาน</li>
+        </ul>
+      </div>
+      <div class="pcard">
+        <div class="picon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M4 8h16v11a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1z"/><path d="M16 8a4 4 0 0 0-8 0"/><circle cx="14.5" cy="13.5" r="1.2" fill="currentColor" stroke="none"/></svg></div>
+        <h3>ออมทรัพย์ & บำนาญ</h3>
+        <p>สร้างวินัยการออมระยะยาว เตรียมเงินก้อนไว้ใช้ในวันเกษียณอย่างสบายใจ</p>
+        <ul>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg>ออมแบบมีเป้าหมายชัดเจน</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg>การันตีผลตอบแทนบางแบบ</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg>วางแผนเกษียณล่วงหน้า</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ ABOUT ============ -->
+<section id="about" style="background:var(--surface-2)">
+  <div class="wrap about-grid">
+    <div class="about-photo">รูปบรรยากาศการให้คำปรึกษา<br>หรือรูปคู่กับลูกค้า</div>
+    <div>
+      <span class="kicker">เกี่ยวกับผม</span>
+      <h2>ที่ปรึกษาที่อยากให้คุณ “เข้าใจ” ก่อนตัดสินใจ</h2>
+      <div class="body">
+        <p>ผมชื่อ จิรวัฒน์ พันธ์เกษกรณ์ ตัดสินใจออกจากธุรกิจที่บ้านมาเป็นที่ปรึกษาประกันชีวิตเต็มตัว เพราะเห็นว่าคนไทยจำนวนมากยังไม่มีหลักประกัน หรือมีแล้วแต่ทำไว้ไม่ตรงกับความต้องการจริง</p>
+        <p>ผมไม่ได้ตั้งใจขายให้ครบทุกแบบ แต่ตั้งใจให้คุณเข้าใจว่าแผนไหนเหมาะกับชีวิตและงบของคุณจริง ๆ คุยกันตรงไปตรงมา ไม่กดดัน และดูแลกันต่อหลังทำกรมธรรม์</p>
+      </div>
+      <div class="factgrid">
+        <div class="fact"><b>รหัสตัวแทน 685253</b><span>ขึ้นทะเบียนตัวแทน AIA</span></div>
+        <div class="fact"><b>โทร 099-770-2627</b><span>ติดต่อได้โดยตรง</span></div>
+        <div class="fact"><b>ปรึกษาฟรี</b><span>ไม่มีค่าใช้จ่ายและไม่ผูกมัด</span></div>
+        <div class="fact"><b>ดูแลต่อเนื่อง</b><span>ช่วยตั้งแต่เลือกแผนถึงเคลม</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ PROCESS ============ -->
+<section id="process">
+  <div class="wrap">
+    <div class="shead center">
+      <span class="kicker">ขั้นตอนง่าย ๆ</span>
+      <h2>เริ่มต้นวางแผนใน 4 ขั้นตอน</h2>
+    </div>
+    <div class="steps">
+      <div class="step"><h4>นัดหมาย</h4><p>กรอกฟอร์มหรือโทรหาผม เลือกช่องทางและเวลาที่คุณสะดวก</p></div>
+      <div class="step"><h4>พูดคุยทำความเข้าใจ</h4><p>เล่าเรื่องชีวิต งบประมาณ และสิ่งที่กังวล เพื่อให้แผนตรงกับคุณ</p></div>
+      <div class="step"><h4>เสนอแผนที่เหมาะ</h4><p>ผมสรุปทางเลือกพร้อมข้อดีข้อจำกัดอย่างตรงไปตรงมา</p></div>
+      <div class="step"><h4>ตัดสินใจ & ดูแลต่อ</h4><p>เลือกเมื่อพร้อม และผมดูแลคุณต่อไปจนถึงวันเคลม</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ BLOG ============ -->
+<section id="blog" style="background:var(--surface-2)">
+  <div class="wrap">
+    <div class="shead">
+      <span class="kicker">บทความ</span>
+      <h2>เรื่องประกันสุขภาพ เข้าใจง่าย</h2>
+      <p>ความรู้เรื่องประกันสุขภาพและการวางแผนการเงิน ที่ผมตั้งใจเขียนให้อ่านเข้าใจได้จริง</p>
+    </div>
+    <div class="blog-grid">
+      <a href="#" class="bcard">
+        <div class="bcover"><span>ประกันสุขภาพ 101</span></div>
+        <div class="bbody">
+          <div class="bmeta">ประกันสุขภาพ · อ่าน 5 นาที</div>
+          <h3>ประกันสุขภาพเหมาจ่าย กับ แยกค่าใช้จ่าย ต่างกันยังไง?</h3>
+          <p>เปรียบเทียบ 2 รูปแบบที่คนสับสนบ่อยที่สุด พร้อมตัวอย่างให้เห็นภาพว่าแบบไหนเหมาะกับใคร</p>
+          <span class="more">อ่านบทความ →</span>
+        </div>
+      </a>
+      <a href="#" class="bcard">
+        <div class="bcover c2"><span>ก่อนซื้อต้องรู้</span></div>
+        <div class="bbody">
+          <div class="bmeta">ประกันสุขภาพ · อ่าน 6 นาที</div>
+          <h3>5 ข้อที่ควรเช็กก่อนทำประกันสุขภาพเล่มแรก</h3>
+          <p>วงเงิน ความคุ้มครอง โรคที่ยกเว้น และระยะเวลารอคอย — เช็กให้ครบก่อนเซ็น</p>
+          <span class="more">อ่านบทความ →</span>
+        </div>
+      </a>
+      <a href="#" class="bcard">
+        <div class="bcover c3"><span>วางแผนการเงิน</span></div>
+        <div class="bbody">
+          <div class="bmeta">ประกันสุขภาพ · อ่าน 4 นาที</div>
+          <h3>มีประกันสังคมแล้ว ยังจำเป็นต้องมีประกันสุขภาพอีกไหม?</h3>
+          <p>ความคุ้มครองที่ประกันสังคมให้ และช่องว่างที่ประกันสุขภาพเข้ามาช่วยเติม</p>
+          <span class="more">อ่านบทความ →</span>
+        </div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ============ CONTACT / FORM ============ -->
+<section id="contact" class="contact">
+  <div class="wrap contact-grid">
+    <div class="contact-info">
+      <span class="kicker">นัดหมาย</span>
+      <h2>เริ่มต้นด้วยการคุยกันก่อน</h2>
+      <p>ฝากข้อมูลไว้ ผมจะติดต่อกลับเพื่อนัดเวลาปรึกษาที่คุณสะดวก ฟรีและไม่มีข้อผูกมัดใด ๆ</p>
+      <div class="cmethods">
+        <a href="tel:0997702627" class="cmethod">
+          <span class="ci"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3 19.5 19.5 0 0 1-6-6 19.8 19.8 0 0 1-3-8.7A2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .4 1.9.7 2.8a2 2 0 0 1-.5 2.1L8.1 9.9a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.8.7a2 2 0 0 1 1.7 2z"/></svg></span>
+          <div><b>099-770-2627</b><span>โทรหรือส่งข้อความได้เลย</span></div>
+        </a>
+        <div class="cmethod soon">
+          <span class="ci"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M21 11.5a8.4 8.4 0 0 1-8.5 8.4c-1.4 0-2.8-.3-4-.9L3 20l1-3.6A8.2 8.2 0 0 1 3 11.5 8.4 8.4 0 0 1 12.5 3 8.4 8.4 0 0 1 21 11.5z"/></svg></span>
+          <div><b>LINE Official</b><span>แชตปรึกษาแบบส่วนตัว</span></div>
+          <span class="soon-pill">เปิดเร็ว ๆ นี้</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="formcard">
+      <form id="appointForm" novalidate>
+        <h3>ฟอร์มนัดหมายปรึกษา</h3>
+        <p class="fsub">กรอกข้อมูลคร่าว ๆ ผมจะติดต่อกลับโดยเร็วที่สุด</p>
+
+        <div class="field">
+          <label>ช่องทางที่สะดวกให้ติดต่อกลับ</label>
+          <div class="radio-pills">
+            <label><input type="radio" name="channel" value="โทรศัพท์" checked><span>โทรศัพท์</span></label>
+            <label><input type="radio" name="channel" value="LINE"><span>LINE</span></label>
+            <label><input type="radio" name="channel" value="อย่างไรก็ได้"><span>อย่างไรก็ได้</span></label>
+          </div>
+        </div>
+
+        <div class="row2">
+          <div class="field">
+            <label>ชื่อ-นามสกุล <span class="req">*</span></label>
+            <input type="text" name="name" placeholder="เช่น สมชาย ใจดี" />
+            <div class="err">กรุณากรอกชื่อ-นามสกุล</div>
+          </div>
+          <div class="field">
+            <label>เบอร์โทรศัพท์ <span class="req">*</span></label>
+            <input type="tel" name="phone" inputmode="numeric" placeholder="08X-XXX-XXXX" />
+            <div class="err">กรุณากรอกเบอร์โทรให้ถูกต้อง (9-10 หลัก)</div>
+          </div>
+        </div>
+
+        <div class="field">
+          <label>สนใจเรื่องไหนเป็นพิเศษ</label>
+          <select name="interest">
+            <option value="ประกันสุขภาพ">ประกันสุขภาพ</option>
+            <option value="ประกันชีวิต">ประกันชีวิต</option>
+            <option value="ออมทรัพย์ / บำนาญ">ออมทรัพย์ / บำนาญ</option>
+            <option value="ประกันโรคร้ายแรง">ประกันโรคร้ายแรง</option>
+            <option value="ยังไม่แน่ใจ อยากปรึกษาก่อน">ยังไม่แน่ใจ อยากปรึกษาก่อน</option>
+          </select>
+        </div>
+
+        <div class="field">
+          <label>ข้อความเพิ่มเติม</label>
+          <textarea name="message" placeholder="เช่น ช่วงเวลาที่สะดวกให้ติดต่อ หรือสิ่งที่อยากปรึกษา"></textarea>
+        </div>
+
+        <button type="submit" class="btn btn-primary" style="width:100%;padding:14px">ส่งคำขอนัดหมาย</button>
+        <p class="consent">เมื่อส่งฟอร์ม ถือว่าคุณยินยอมให้ผมติดต่อกลับเพื่อให้คำปรึกษา ข้อมูลของคุณจะถูกเก็บเป็นความลับและใช้เพื่อการติดต่อเท่านั้น</p>
+      </form>
+
+      <div class="form-success" id="formSuccess">
+        <div class="ok"><svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M20 6L9 17l-5-5"/></svg></div>
+        <h3>ส่งคำขอเรียบร้อยแล้ว</h3>
+        <p>ขอบคุณครับ <b id="successName"></b> ผมจะติดต่อกลับโดยเร็วที่สุด หากเร่งด่วนโทรได้ที่ 099-770-2627</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ FAQ ============ -->
+<section id="faq">
+  <div class="wrap">
+    <div class="shead center">
+      <span class="kicker">คำถามที่พบบ่อย</span>
+      <h2>เรื่องที่หลายคนสงสัย</h2>
+    </div>
+    <div class="faq-wrap">
+      <div class="faq-item">
+        <button class="faq-q">การปรึกษามีค่าใช้จ่ายไหม?<span class="ic"></span></button>
+        <div class="faq-a"><div>ไม่มีครับ การปรึกษาวางแผนครั้งแรกฟรีและไม่มีข้อผูกมัด คุณจะตัดสินใจทำหรือไม่ก็ได้หลังเข้าใจทางเลือกทั้งหมดแล้ว</div></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q">ทำประกันสุขภาพตอนอายุเท่าไหร่ดีที่สุด?<span class="ic"></span></button>
+        <div class="faq-a"><div>โดยทั่วไปยิ่งทำเร็วเบี้ยยิ่งถูกและสุขภาพยังแข็งแรงทำให้ผ่านการพิจารณาง่ายกว่า แต่แผนที่เหมาะขึ้นอยู่กับสถานการณ์ของแต่ละคน เรามาดูด้วยกันได้</div></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q">มีประกันกลุ่มจากบริษัทแล้ว ยังต้องทำเพิ่มไหม?<span class="ic"></span></button>
+        <div class="faq-a"><div>ประกันกลุ่มมักคุ้มครองเฉพาะช่วงที่ยังทำงานและวงเงินจำกัด การมีประกันส่วนตัวช่วยอุดช่องว่างและติดตัวคุณไปได้แม้เปลี่ยนงาน ผมช่วยดูว่ามีส่วนไหนที่ขาดได้</div></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q">ทำกรมธรรม์แล้วดูแลต่อยังไง?<span class="ic"></span></button>
+        <div class="faq-a"><div>ผมดูแลคุณต่อเนื่อง ตั้งแต่ช่วยทบทวนความคุ้มครองเมื่อชีวิตเปลี่ยน ไปจนถึงให้คำแนะนำและช่วยประสานงานเรื่องการเคลม</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ FINAL CTA ============ -->
+<section class="finalcta">
+  <div class="wrap">
+    <h2>หลักประกันที่ดี เริ่มจากการคุยกันก่อน</h2>
+    <p>ไม่ต้องตัดสินใจวันนี้ แค่มาทำความเข้าใจทางเลือกของคุณ ฟรีและไม่มีข้อผูกมัด</p>
+    <div class="hero-actions">
+      <a href="#contact" class="btn btn-light">นัดหมายปรึกษาฟรี</a>
+      <a href="tel:0997702627" class="btn btn-ghost" style="color:#fff;border-color:oklch(100% 0 0 / .3)">โทร 099-770-2627</a>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<!-- ============ FOOTER ============ -->
+<footer>
+  <div class="wrap">
+    <div class="foot-top">
+      <div class="foot-brand">
+        <b>จิรวัฒน์ พันธ์เกษกรณ์</b>
+        <p>ที่ปรึกษาประกันชีวิตและการเงิน ตัวแทน AIA · รหัสตัวแทน 685253</p>
+      </div>
+      <div class="foot-cols">
+        <div class="foot-col">
+          <h5>เมนู</h5>
+          <a href="#plans">แผนความคุ้มครอง</a>
+          <a href="#about">เกี่ยวกับผม</a>
+          <a href="#blog">บทความ</a>
+          <a href="#faq">คำถามที่พบบ่อย</a>
+        </div>
+        <div class="foot-col">
+          <h5>ติดต่อ</h5>
+          <a href="tel:0997702627">099-770-2627</a>
+          <a href="#contact">นัดหมายปรึกษา</a>
+          <a href="#">LINE Official (เร็ว ๆ นี้)</a>
+        </div>
+      </div>
+    </div>
+    <div class="foot-bottom">
+      © 2026 จิรวัฒน์ พันธ์เกษกรณ์ · สงวนลิขสิทธิ์
+      <div class="disc">ข้อมูลในเว็บไซต์นี้เป็นข้อมูลเบื้องต้นเพื่อประกอบการตัดสินใจเท่านั้น ความคุ้มครอง เงื่อนไข และเบี้ยประกันเป็นไปตามที่ระบุในกรมธรรม์และการพิจารณารับประกันของบริษัทจริง</div>
+    </div>
+  </div>
+</footer>
+
+<script>
+(function(){
+  // mobile nav
+  var burger=document.getElementById('burger'), nav=document.getElementById('nav');
+  burger.addEventListener('click',function(){ nav.classList.toggle('mobile-open'); });
+  document.querySelectorAll('#navLinks a').forEach(function(a){
+    a.addEventListener('click',function(){ nav.classList.remove('mobile-open'); });
+  });
+
+  // faq accordion
+  document.querySelectorAll('.faq-q').forEach(function(q){
+    q.addEventListener('click',function(){
+      var item=q.parentElement, open=item.classList.contains('open');
+      document.querySelectorAll('.faq-item.open').forEach(function(i){ i.classList.remove('open'); });
+      if(!open) item.classList.add('open');
+    });
+  });
+
+  // form validation
+  var form=document.getElementById('appointForm');
+  function setInvalid(field,bad){ field.classList.toggle('invalid',bad); return !bad; }
+  form.addEventListener('submit',function(e){
+    e.preventDefault();
+    var nameF=form.name.closest('.field'), phoneF=form.phone.closest('.field');
+    var okName=setInvalid(nameF, form.name.value.trim().length<2);
+    var digits=form.phone.value.replace(/\D/g,'');
+    var okPhone=setInvalid(phoneF, digits.length<9 || digits.length>10);
+    if(okName && okPhone){
+      document.getElementById('successName').textContent=form.name.value.trim();
+      form.style.display='none';
+      document.getElementById('formSuccess').classList.add('show');
+    }else{
+      (okName?phoneF:nameF).querySelector('input').focus();
+    }
+  });
+  // live clear
+  ['name','phone'].forEach(function(n){
+    form[n].addEventListener('input',function(){ this.closest('.field').classList.remove('invalid'); });
+  });
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,17 @@
+---
+interface Props {
+  question: string;
+}
+
+const { question } = Astro.props;
+---
+
+<details class="group">
+  <summary class="flex cursor-pointer list-none items-center justify-between gap-4 py-5 text-[17px] font-semibold">
+    {question}
+    <span class="relative size-6 shrink-0 before:absolute before:left-1/2 before:top-1/2 before:h-0.5 before:w-3.5 before:-translate-x-1/2 before:-translate-y-1/2 before:rounded before:bg-brand-accent after:absolute after:left-1/2 after:top-1/2 after:h-3.5 after:w-0.5 after:-translate-x-1/2 after:-translate-y-1/2 after:rounded after:bg-brand-accent group-open:after:hidden"></span>
+  </summary>
+  <div class="pb-5 text-[15.5px] text-brand-muted">
+    <slot />
+  </div>
+</details>

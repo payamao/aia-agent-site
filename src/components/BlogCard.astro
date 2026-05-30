@@ -1,0 +1,44 @@
+---
+import { ChevronRight } from "lucide-astro";
+import type { BlogPost } from "@/lib/blog";
+import { formatThaiDate, getBlogUrl } from "@/lib/blog";
+
+interface Props {
+  post: BlogPost;
+}
+
+const { post } = Astro.props;
+const toneClass = {
+  navy: "from-brand-navy to-brand-navy-2",
+  red: "from-brand-accent-dark to-brand-accent",
+  teal: "from-[oklch(40%_0.07_200)] to-[oklch(52%_0.1_200)]",
+}[post.data.coverTone];
+---
+
+<a
+  href={getBlogUrl(post)}
+  class="group flex overflow-hidden rounded-2xl border border-brand-border bg-white transition hover:-translate-y-1 hover:border-transparent hover:shadow-[0_18px_44px_oklch(27%_0.055_258/.12)]"
+>
+  <article class="flex w-full flex-col">
+    <div class={`grid aspect-video place-items-center bg-gradient-to-br ${toneClass}`}>
+      <span class="rounded-full border border-white/30 px-3 py-1.5 text-[13px] font-semibold tracking-[0.04em] text-white/85">
+        {post.data.coverLabel}
+      </span>
+    </div>
+    <div class="flex flex-1 flex-col p-6">
+      <div class="text-[12.5px] tracking-[0.02em] text-brand-muted">
+        {post.data.category} · {post.data.readingTime} · {formatThaiDate(post.data.pubDate)}
+      </div>
+      <h3 class="mt-2 text-lg font-semibold leading-snug text-brand-fg">
+        {post.data.title}
+      </h3>
+      <p class="mt-2 flex-1 text-[14.5px] leading-relaxed text-brand-muted">
+        {post.data.description}
+      </p>
+      <span class="mt-4 inline-flex items-center gap-1.5 text-sm font-semibold text-brand-accent">
+        อ่านบทความ
+        <ChevronRight class="size-4 transition group-hover:translate-x-0.5" aria-hidden="true" />
+      </span>
+    </div>
+  </article>
+</a>
