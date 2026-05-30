@@ -3,5 +3,11 @@
   "name": "aia-agent-site",
   "compatibility_date": "2026-05-29",
   "compatibility_flags": ["nodejs_compat"],
-  "pages_build_output_dir": "./dist"
+  "pages_build_output_dir": "./dist",
+  "kv_namespaces": [
+    {
+      "binding": "SESSION",
+      "id": "a704f0e5a6b94539b70d32a9944b4ab0"
+    }
+  ]
 }
