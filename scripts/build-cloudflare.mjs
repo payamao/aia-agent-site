@@ -6,7 +6,12 @@ const hasTinaCloud =
 run("astro", ["check"]);
 
 if (hasTinaCloud) {
-  run("tinacms", ["build"]);
+  const tinaBuild = run("tinacms", ["build"], { exitOnError: false });
+  if (tinaBuild.status !== 0) {
+    console.warn(
+      "Tina Cloud admin build failed. Continuing with the public site so production deploy is not blocked. Check Tina Cloud project configuration and branch indexing.",
+    );
+  }
 } else {
   console.warn(
     "Tina Cloud env is missing; building site without /admin. Set TINA_PUBLIC_CLIENT_ID and TINA_TOKEN to enable Tina Cloud admin.",
@@ -15,7 +20,7 @@ if (hasTinaCloud) {
 
 run("astro", ["build"]);
 
-function run(command, args) {
+function run(command, args, options = {}) {
   const result = spawnSync(command, args, {
     stdio: "inherit",
     env: {
@@ -25,7 +30,9 @@ function run(command, args) {
     shell: process.platform === "win32",
   });
 
-  if (result.status !== 0) {
+  if (result.status !== 0 && options.exitOnError !== false) {
     process.exit(result.status ?? 1);
   }
+
+  return result;
 }
