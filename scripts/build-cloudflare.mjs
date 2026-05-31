@@ -6,7 +6,11 @@ const hasTinaCloud =
 run("astro", ["check"]);
 
 if (hasTinaCloud) {
-  const tinaBuild = run("tinacms", ["build"], { exitOnError: false });
+  const tinaBuild = run(
+    "tinacms",
+    ["build", "--skip-cloud-checks", "--skip-indexing", "--skip-search-index"],
+    { exitOnError: false },
+  );
   if (tinaBuild.status !== 0) {
     console.warn(
       "Tina Cloud admin build failed. Continuing with the public site so production deploy is not blocked. Check Tina Cloud project configuration and branch indexing.",
