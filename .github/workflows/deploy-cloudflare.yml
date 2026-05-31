@@ -13,7 +13,7 @@ jobs:
       contents: read
     env:
       FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
-      PUBLIC_SITE_URL: https://aia-agent-site.pages.dev
+      PUBLIC_SITE_URL: https://bolt.in.th
       TINA_PUBLIC_CLIENT_ID: ${{ secrets.TINA_PUBLIC_CLIENT_ID }}
       TINA_TOKEN: ${{ secrets.TINA_TOKEN }}
       TINA_PUBLIC_BRANCH: main
